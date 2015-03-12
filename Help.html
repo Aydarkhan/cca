@@ -1,0 +1,92 @@
+<!--
+Copyright 2010 Aydarkhanov Ruslan, Kurochkin Ilya, Rusinov Ivan
+
+This file is part of Foobar.
+
+Foobar is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 2 of the License, or (at your option) any later version.
+
+Foobar is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License along with Foobar. If not, see http://www.gnu.org/licenses/.
+
+-->
+<html>
+	<head>
+		<title>
+			Cyclic cellular automata editor
+		</title>
+		<meta http-equv="content-type" content="text/html; charset=windows-1251">
+		<style type="text/css">
+			body {background-color:#F0F0F0}
+			A:link {color:green; text-decoration:none}
+			A:active {color:green; text-decoration:none}
+			A:visited {color:green; text-decoration:none}
+			h4 {text-indent:40}
+			p {text-indent:40}
+		</style>
+	</head>
+	<body>
+		<h3 align="center">
+			CCA - Cyclic cellular automata editor
+		<h3>
+		<h4>
+			CCA is cyclic cellular automata creation, editing and visualization tool.
+		</h4>
+		<p>
+			<b>Cellular automaton</b> is a set of cells. Each cell can be in one of several possible states. Cell can change its state, according to state of neighbors of the cell. This process is determined by transition rules. <b>Cyclic cellular automaton</b> is a kind of cellular automaton, its set of states is a cycle, and cell changes its state to next one, according to cycle order. It works with <b>2-dimentional cyclic cellular automaton</b> with rectangular field. Transition rules should be defined through number of neighbors of the cell in same state. This program allows user to change number of cell`s states, order of states and transition rules for each state. Other options are automaton step duration, scale of field, colors of cell in defferent states.
+		</p>
+		<p align="center">
+			<br><big>Window of the program</big><br><br>
+			<img src="Help/window.png">
+		</p>
+		<p>
+			Window of the program contains menubar, automaton field and status line. Status line displays current size of field, automaton status (running/paused), and speed as inverse value of delay between automaton conditions in running state.
+		</p>
+		<h3 align="center">
+			Menubar
+		</h3>
+		<p>
+			Menubar includes <b>File</b>, <b>Action</b>, <b>Automaton</b> and <b>Help</b> items. <b>File</b> menu contains <b>New</b>, <b>Open ..</b>, <b>Save ..</b> and <b>Exit</b> items.<br><br>
+<b>New</b> creates new CCA progect with empty field and "Life" type of automaton.<br>
+<b>Open ..</b> allows to load automaton from CAF file, that was created with this program.<br>
+<b>Save ..</b> allows to save current automaton in CAF file.<br>
+<b>Exit</b> finishes work of the program.
+		</p>
+		<p>
+			<b>Action</b> menu contains <b>Start</b>, <b>Stop</b>, <b>Next step</b>, <b>Increase speed</b>, <b>Decrease speed</b>, <b>Zoom in</b>, <b>Zoom out</b>, <b>Clean field</b>, <b>Fill randomly</b> and <b>Change size</b> items.<br><br>
+<b>Start</b> switches automaton to running state.<br>
+<b>Stop</b> stops automaton, if it is in running state.<br>
+<b>Next step</b> places automaton into next condition, stops automaton, if it is in running state.<br>
+<b>Increase speed</b> decreases delay between contitions of automaton twofold while it is in running state.<br>
+<b>Decrease speed</b> increases delay between contitions of automaton twofold while it is in running state.<br>
+<b>Zoom in</b> increases size of cells.<br>
+<b>Zoom out</b> decreases size of cells.<br>
+<b>Clean field</b> converts all cells in first state of automaton list of states.<br>
+<b>Fill randomly</b> converts all cells in accidental state of states list with identical probabilities.<br>
+<b>Change size</b> opens change size window.
+		</p>
+		<p align="center">
+			<br><big>Change size window</big><br><br>
+			<img src="Help/size_window.png">
+		</p>
+		<p>
+			Change size window allows user to change size of the field on certain side. Side can be appointed through group of nine buttons. If choosen button side have no neighbor buttons, equal side of field will not be changed. New dimensions of field should be determinated through entry fields (X dimention <b>x</b> Y dimention).
+		</p>
+		<p>
+			<b>Automaton</b> item opens automaton window. It contains list of states, group of buttons of changing states order in list and change/add state area, that includes tools for changing parameters of state. "Change" button changes choosen state and "Add" button adds new one. Each state should have name, unique symbol, color and unique key. Key is keyboard key, that simplify changing cells state to conformable state.
+		</p>
+		<p align="center">
+			<br><big>Automaton window</big><br><br>
+			<img src="Help/automaton_window.png">
+		</p>
+		<p>
+			To set name, key or symbol of state, use entry fields. To set state color, press to the colored area and then choose new color. To set transition rules, use checkboxes. If checkbox with label <b>N</b> is choosen (<b>N</b> = 0, 1, ... 8), then cell in the state will change it, if the cell have <b>N</b> neighbors in same state.
+		</p>
+		<h3 align="center">
+			Mouse drawing
+		</h3>
+		<p>
+			User have ability to change cells states with mouse. Pressing <b>left button</b> of mouse results in changing of cell state to <b>next</b> one. <b>Right button</b> changes state to <b>previous</b> one. If keyboard <b>key</b> is being pressed during motion of mouse with pressed button, cells change their state to that corresponds to the key.
+		</p>
+	</body>
+</html>
