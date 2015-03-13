@@ -4,3 +4,8 @@
 
 #### Requirements
 GUI is implemented with Tkinter
+
+#### Authors
+Ilya Kurochkin, Ivan Rusinov, Ruslan Aydarkhanov
+
+2010
