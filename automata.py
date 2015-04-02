@@ -24,7 +24,8 @@ class Automata(object):
 		self.height = height
 		if states == None:
 			self.states = [State("Dead", '-', "white", '0', [5]),
-					State("Alive", '+', "black", '1', [0, 1] + range(4, 9))]
+			               State("Alive", '+', "black", '1',
+			                     [0, 1, 4, 5, 6, 7, 8])]
 		else:
 			self.states = states
 		self.symbols = {}
@@ -37,7 +38,7 @@ class Automata(object):
 			self.field.append([])
 			for col in range(width):
 				self.field[row].append(self.states[0].symbol)
-
+	
 	def next_step(self):
 		changed = []
 		for row in range(1, self.height - 1):
@@ -50,7 +51,7 @@ class Automata(object):
 							num += 1
 				if self.st_sym[symbol].next_state(num - 1):
 					changed.append((row, col))
-					
+		
 		for row in range(1, self.height - 1):
 			symbol1 = self.field[row][0]
 			symbol2 = self.field[row][self.width - 1]
@@ -67,7 +68,7 @@ class Automata(object):
 				changed.append((row, 0))
 			if self.st_sym[symbol2].next_state(num2 - 1):
 				changed.append((row, self.width - 1))
-				
+		
 		for col in range(1, self.width - 1):
 			symbol1 = self.field[0][col]
 			symbol2 = self.field[self.height - 1][col]
@@ -84,28 +85,28 @@ class Automata(object):
 				changed.append((0, col))
 			if self.st_sym[symbol2].next_state(num2 - 1):
 				changed.append((self.height - 1, col))
-				
+		
 		for row, col in [(0, 0), (self.height - 1, self.width - 1),
-						(0, self.width - 1), (self.height - 1, 0)]:
+		                 (0, self.width - 1), (self.height - 1, 0)]:
 			symbol = self.field[row][col]
 			num = 0
-			for vert_long in range(row + self.height - 1, 
-									row + self.height + 2):
-				for horiz_long in range(col + self.width - 1, 
-										col + self.width + 2):
+			for vert_long in range(row + self.height - 1,
+			                       row + self.height + 2):
+				for horiz_long in range(col + self.width - 1,
+				                        col + self.width + 2):
 					vert = vert_long % self.height
 					horiz = horiz_long % self.width
 					if self.field[vert][horiz] == symbol:
 						num += 1
 			if self.st_sym[symbol].next_state(num - 1):
 				changed.append((row, col))
-						
+		
 		for row, col in changed:
-			index = (self.symbols[self.field[row][col]] + 
-														1) %  len(self.states)
+			index = (self.symbols[self.field[row][col]] +
+			         1) % len(self.states)
 			self.field[row][col] = self.states[index].symbol
 		return changed
-
+	
 	def change_size(self, value, side):
 		"0-up, 1-right, 2-down, 3-left"
 		new_field = []
@@ -123,7 +124,7 @@ class Automata(object):
 				new_field.append([])
 				for col in range(self.width):
 					new_field[row].append(self.field[row - value][col])
-					
+		
 		if side == 2:
 			self.height += value
 			term = value
@@ -137,7 +138,7 @@ class Automata(object):
 				new_field.append([])
 				for col in range(self.width):
 					new_field[row].append(self.states[0].symbol)
-					
+		
 		if side == 1:
 			self.width += value
 			term = value
@@ -150,7 +151,7 @@ class Automata(object):
 			for row in range(self.height):
 				for col in range(self.width - term, self.width):
 					new_field[row].append(self.states[0].symbol)
-					
+		
 		if side == 3:
 			self.width += value
 			for row in range(self.height):
@@ -164,3 +165,4 @@ class Automata(object):
 				for col in range(init, self.width):
 					new_field[row].append(self.field[row][col - value])
 		self.field = new_field
+

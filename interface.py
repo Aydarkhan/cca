@@ -73,16 +73,16 @@ class Handlers(object):
 	
 	def save_file(self, event=None):
 		file = tkFileDialog.asksaveasfile(defaultextension=".caf",
-											title="Save automata as",
-											filetypes=[('CCA File', '*.caf')],
-											mode="wb")
+		                                  title="Save automata as",
+		                                  filetypes=[("CCA File", "*.caf")],
+		                                  mode="wb")
 		if file is not None:
 			pickle.dump([automata.field, automata.states], file)
 	
 	def open_file(self, event=None):
 		file = tkFileDialog.askopenfile(title="Open file",
-										filetypes=[('CCA File', '*.caf')],
-										mode="rb")
+		                                filetypes=[("CCA File", "*.caf")],
+		                                mode="rb")
 		if file is not None:
 			from_file = pickle.load(file)
 			automata.field = from_file[0]
@@ -96,8 +96,7 @@ class Handlers(object):
 			self.draw()
 	
 	def new_file(self, event=None):
-		if tkMessageBox.askyesno("Save?", 
-									"Save current automata?"):
+		if tkMessageBox.askyesno("Save?", "Save current automata?"):
 			self.save_file()
 		new_automata = Automata()
 		automata.field = new_automata.field
@@ -111,7 +110,7 @@ class Handlers(object):
 		self.draw()
 	
 	def show_help_window(self):
-		url = 'Help.html'
+		url = "Help.html"
 		webbrowser.open(url, new=1, autoraise=True)
 	
 	def zoom_in(self, event=None, zoom_rate=1):
@@ -182,10 +181,10 @@ class Handlers(object):
 				index = automata.symbols[automata.field[row][col]]
 				color = automata.states[index].color
 				cell = canvas.create_rectangle(left + col * shift,
-								top + row * shift,
-								left + col * shift + self.cell_size,
-								top + row * shift + self.cell_size,
-								fill=color, outline="", tag="cell")
+				                top + row * shift,
+				                left + col * shift + self.cell_size,
+				                top + row * shift + self.cell_size,
+				                fill=color, outline="", tag="cell")
 				self.cells[row].append(cell)
 	
 	def draw_line(self, x1, y1, x2, y2, order=1):
@@ -218,7 +217,7 @@ class Handlers(object):
 			if col >= 0 and row >= 0:
 				try:
 					index = (automata.symbols[automata.field[row][col]] +
-								num_states + order) % num_states
+					         num_states + order) % num_states
 					if self.char is not None and self.char in self.keys:
 						index = self.keys[self.char]
 					automata.field[row][col] = automata.states[index].symbol
@@ -344,8 +343,8 @@ class Handlers(object):
 		color = state_color.cget("bg")
 		nums = []
 		for i, value in enumerate(ckeckbox_nums):
-				if value.get() == 1:
-					nums.append(i)
+			if value.get() == 1:
+				nums.append(i)
 		if self.keys.has_key(key):
 			error.config(text="State with such key has already existed")
 			error.after(2000, self.clear_error)
@@ -420,7 +419,7 @@ class Handlers(object):
 		self.draw_cell(cells)
 	
 	def show_size_window(self, event=None):
-		sizes = str(len(automata.field[0])) + " x " + str(len(automata.field))
+		sizes = "%d x %d" % (len(automata.field[0]), len(automata.field))
 		size_label.config(text=sizes)
 		size_window.deiconify()
 	
@@ -519,7 +518,7 @@ class Handlers(object):
 		canvas.config(scrollregion=(0, 0, width, height))
 	
 	def update_status(self):
-		size = str(len(automata.field[0])) + " x " + str(len(automata.field))
+		size = "%d x %d" % (len(automata.field[0]), len(automata.field))
 		status_size.config(text="size: " + size)
 		state = "paused"
 		speed = 0
@@ -588,7 +587,7 @@ list_frame = Frame(automata_window)
 scrollbar = Scrollbar(list_frame)
 scrollbar.pack(side="right", fill="y")
 state_list = Listbox(list_frame, yscrollcommand=scrollbar.set,
-						activestyle="none", selectmode="single")
+                     activestyle="none", selectmode="single")
 handlers.refresh_list()
 state_list.bind("<ButtonRelease-1>", handlers.list_mouse_release)
 state_list.pack(side="top", fill="y")
@@ -598,22 +597,22 @@ list_frame.pack(side="top")
 manip_frame1 = Frame(automata_window, padx=10, pady=5)
 up = Button(manip_frame1, text="Up", command=handlers.upwards, width=10)
 to_top = Button(manip_frame1, text="To Top",
-					command=handlers.to_top, width=10)
+                command=handlers.to_top, width=10)
 up.pack(side="left", fill="x")
 to_top.pack(side="right", fill="x")
 manip_frame1.pack(side="top", fill="x")
 
 manip_frame2 = Frame(automata_window, padx=10, pady=5)
 down = Button(manip_frame2, text="Down",
-					command=handlers.downwards, width=10)
+              command=handlers.downwards, width=10)
 to_bottom = Button(manip_frame2, text="To Bottom",
-					command=handlers.to_bottom, width=10)
+                   command=handlers.to_bottom, width=10)
 down.pack(side="left", fill="x")
 to_bottom.pack(side="right", fill="x")
 manip_frame2.pack(side="top", fill="x")
 
 delete = Button(automata_window, text="Delete",
-				command=handlers.delete_state, width=10)
+                command=handlers.delete_state, width=10)
 delete.pack(side="top")
 
 information = Label(automata_window, text="Information of State")
@@ -634,8 +633,8 @@ state_color.grid(row=3, column=1, sticky="ew")
 state_color.bind('<1>', handlers.choose_color)
 info_frame.pack(side="top")
 
-ckeckbox_nums = [IntVar(), IntVar(), IntVar(), IntVar(), IntVar(), 
-							IntVar(), IntVar(), IntVar(), IntVar()]
+ckeckbox_nums = [IntVar(), IntVar(), IntVar(), IntVar(), IntVar(),
+                 IntVar(), IntVar(), IntVar(), IntVar()]
 
 condition = Label(automata_window, text="Condition of conversion")
 condition.pack(side="top", fill="x")
@@ -672,7 +671,7 @@ condition_frame.pack(side="top")
 add_frame = Frame(automata_window, padx=10, pady=5)
 add_state = Button(add_frame, text="Add", command=handlers.add, width=10)
 change_state = Button(add_frame, text="Change",
-						command=handlers.change, width=10)
+                      command=handlers.change, width=10)
 add_state.pack(side="left", fill="x")
 change_state.pack(side="right", fill="x")
 add_frame.pack(side="top", fill="x")
@@ -701,41 +700,41 @@ new_size.pack(side="top")
 Label(size_window, text="Expansion of window:").pack(side="top", fill="x")
 expansion = Frame(size_window)
 r0 = Radiobutton(expansion, variable=side, value=0, indicatoron=0,
-													width=2, height=1)
+                 width=2, height=1)
 r0.select()
 r0.grid(row=0, column=0)
 r1 = Radiobutton(expansion, variable=side, value=1, indicatoron=0,
-													width=2, height=1)
+                 width=2, height=1)
 r1.grid(row=0, column=1)
 r2 = Radiobutton(expansion, variable=side, value=2, indicatoron=0,
-													width=2, height=1)
+                 width=2, height=1)
 r2.grid(row=0, column=2)
 r3 = Radiobutton(expansion, variable=side, value=3, indicatoron=0,
-													width=2, height=1)
+                 width=2, height=1)
 r3.grid(row=1, column=0)
 r4 = Radiobutton(expansion, variable=side, value=4, indicatoron=0,
-													width=2, height=1)
+                 width=2, height=1)
 r4.grid(row=1, column=1)
 r5 = Radiobutton(expansion, variable=side, value=5, indicatoron=0,
-													width=2, height=1)
+                 width=2, height=1)
 r5.grid(row=1, column=2)
 r6 = Radiobutton(expansion, variable=side, value=6, indicatoron=0,
-													width=2, height=1)
+                 width=2, height=1)
 r6.grid(row=2, column=0)
 r7 = Radiobutton(expansion, variable=side, value=7, indicatoron=0,
-													width=2, height=1)
+                 width=2, height=1)
 r7.grid(row=2, column=1)
 r8 = Radiobutton(expansion, variable=side, value=8, indicatoron=0,
-													width=2, height=1)
+                 width=2, height=1)
 r8.grid(row=2, column=2)
 expansion.pack(side="top")
 Label(size_window).pack(side="top", fill="x")
 apply_frame = Frame(size_window, padx=10, pady=5)
 apply_size = Button(apply_frame, text="Apply", width=6,
-										command=handlers.change_size)
+                    command=handlers.change_size)
 apply_size.pack(side="left", fill="x")
 close_size = Button(apply_frame, text="Close", width=6,
-										command=handlers.hide_size_window)
+                    command=handlers.hide_size_window)
 close_size.pack(side="right", fill="x")
 apply_frame.pack(side="top", fill="x")
 message = Label(size_window, text="")
@@ -745,61 +744,61 @@ root.config(menu=menubar)
 
 menu_file = Menu(menubar)
 menu_file.add_command(label="New", command=handlers.new_file,
-													accelerator="Ctrl+N")
+                      accelerator="Ctrl+N")
 menu_file.bind_all("<Control-n>", handlers.new_file)
 menu_file.add_command(label="Open...", command=handlers.open_file,
-													accelerator="Ctrl+O")
+                      accelerator="Ctrl+O")
 menu_file.bind_all("<Control-o>", handlers.open_file)
 menu_file.add_command(label="Save...", command=handlers.save_file,
-													accelerator="Ctrl+S")
+                      accelerator="Ctrl+S")
 menu_file.bind_all("<Control-s>", handlers.save_file)
 menu_file.add_separator()
 menu_file.add_command(label="Exit", command=handlers.exit,
-													accelerator="Ctrl+Q")
+                      accelerator="Ctrl+Q")
 menu_file.bind_all("<Control-q>", handlers.exit)
 menubar.add_cascade(label="File", menu=menu_file)
 
 menu_action = Menu(menubar)
 menu_action.add_command(label="Start", command=handlers.start,
-													accelerator="Ctrl+G")
+                        accelerator="Ctrl+G")
 menu_action.bind_all("<Control-g>", handlers.start)
 menu_action.add_command(label="Stop", command=handlers.stop,
-													accelerator="Ctrl+F")
+                        accelerator="Ctrl+F")
 menu_action.bind_all("<Control-f>", handlers.stop)
 menu_action.add_command(label="Next Step", command=handlers.next_step,
-													accelerator="Space")
+                        accelerator="Space")
 menu_action.bind_all("<space>", handlers.next_step)
 menu_action.add_separator()
 menu_action.add_command(label="Increase speed", command=handlers.faster,
-													accelerator="Alt+F")
+                        accelerator="Alt+F")
 menu_action.bind_all("<Alt-f>", handlers.faster)
 menu_action.add_command(label="Decrease speed", command=handlers.slower,
-													accelerator="Alt+S")
+                        accelerator="Alt+S")
 menu_action.bind_all("<Alt-s>", handlers.slower)
 menu_action.add_separator()
 menu_action.add_command(label="Zoom In", command=handlers.zoom_in,
-													accelerator="Ctrl+Z")
+                        accelerator="Ctrl+Z")
 menu_action.bind_all("<Control-z>", handlers.zoom_in)
 menu_action.add_command(label="Zoom Out", command=handlers.zoom_out,
-													accelerator="Ctrl+X")
+                        accelerator="Ctrl+X")
 menu_action.bind_all("<Control-x>", handlers.zoom_out)
 menu_action.add_separator()
 menu_action.add_command(label="Clean field", command=handlers.clean_field,
-													accelerator="Ctrl+C")
+                        accelerator="Ctrl+C")
 menu_action.bind_all("<Control-c>", handlers.clean_field)
 menu_action.add_command(label="Fill randomly",
-													command=handlers.fill_randomly,
-													accelerator="Ctrl+R")
+                        command=handlers.fill_randomly,
+                        accelerator="Ctrl+R")
 menu_action.bind_all("<Control-r>", handlers.fill_randomly)
 menu_action.add_separator()
 menu_action.add_command(label="Change size",
-													command=handlers.show_size_window,
-													accelerator="Ctrl+D")
+                        command=handlers.show_size_window,
+                        accelerator="Ctrl+D")
 menu_action.bind_all("<Control-d>", handlers.show_size_window)
 menubar.add_cascade(label="Action", menu=menu_action)
 
 menubar.add_command(label="Automaton", command=handlers.show_automata_window)
-
 menubar.add_command(label="Help", command=handlers.show_help_window)
 
 root.mainloop()
+

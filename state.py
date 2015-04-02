@@ -18,16 +18,17 @@ along with CCA. If not, see http://www.gnu.org/licenses/.
 
 
 class State(object):
-
+	
 	def __init__(self, name, symbol, color, key, nums):
 		self.name = name
 		self.symbol = symbol
 		self.color = color
 		self.key = key
 		self.nums = nums
-
+	
 	def next_state(self, num):
 		return num in self.nums
-
+	
 	def __repr__(self):
 		return self.symbol + " " + self.name
+
